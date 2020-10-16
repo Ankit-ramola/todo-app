@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <form>
+        <div class="form-group col-md-10">
+          <label for="id">Emp id</label>
+          <input type="text" class="form-control" id="id" #id >
+        </div>
+        <div class="form-group col-md-10">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" #name>
+        </div>
+
+        <div class="form-group col-md-10">
+          <label for="technology">Technology</label>
+          <input type="text" class="form-control" id="Technology" #technology>
+        </div>
+
+        <button type="button" class="btn btn-primary" (click)="onCreateEmp(id, name, technology)">{{editMode? 'Update':'Add'}}</button>
+        <button type="button" class="btn btn-success mx-2" (click)="onSaveEmp()">Save</button>
+        <button type="button" class="btn btn-success" (click)="onFetchEmp()">Fetch</button>
+      </form>
+
+    </div>
+
+    <div class="col-md-6">
+      <h2 class="text-center">Employee List</h2><br>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">S.NO</th>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Technology</th>
+            <th scope="col" >Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of employees, index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{employee.id}}</td>
+            <td>{{employee.name}}</td>
+            <td>{{employee.technology}}</td>
+            <td class="text-center" (click)="onEditEmp(i)"><a class="text-primary"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+            <td class="text-center" (click)="onDeleteEmp(i)"><a class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

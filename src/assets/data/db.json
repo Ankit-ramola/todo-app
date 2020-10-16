@@ -1,0 +1,19 @@
+{
+  "employees": [
+    {
+      "id": "1",
+      "name": "admin",
+      "technology": "html"
+    },
+    {
+      "id": "4",
+      "name": "Ankit ramola",
+      "technology": "react"
+    },
+    {
+      "id": "5",
+      "name": "ANKIT",
+      "technology": "css"
+    }
+  ]
+}
