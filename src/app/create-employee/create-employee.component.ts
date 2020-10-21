@@ -1,80 +1,75 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { EmployeeService } from '../employee.service';
 
+
 @Component({
   selector: 'app-create-employee',
   templateUrl: './create-employee.component.html',
   styleUrls: ['./create-employee.component.css']
 })
 export class CreateEmployeeComponent implements OnInit {
+  // tslint:disable-next-line: ban-types
+  allEmp: Object;
+  empObj = {
+    id : '',
+    name : '',
+    technology : '',
+    allocated : ''
+   };
+
+  data: any;
 
   constructor(private employeeService: EmployeeService) { }
 
-  employees = [];
-
-  @ViewChild('id') id: ElementRef;
-  @ViewChild('name') name: ElementRef;
-  @ViewChild('technology') technology: ElementRef;
-
   editMode = false;
-  editIndex: number;
+  detail = false;
 
-  ngOnInit(): void { }
-  onCreateEmp(id, name, technology) {
-    if (this.editMode) {
-      this.employees[this.editIndex] = {
-        id: id.value,
-        name: name.value,
-        technology: technology.value
-      }
-      this.editMode = false;
-      this.id.nativeElement.value = '';
-      this.name.nativeElement.value = '';
-      this.technology.nativeElement.value = '';
+  ngOnInit(): void{
+    this.onFetchEmp();
+   }
+   onCreateEmp(formObj) {
+     console.log(formObj);
+     this.employeeService.saveEmployee(formObj).subscribe(
+       (response) => console.log(response),
+       (err) => console.log(err));
+     this.onFetchEmp();
 
-    } else {
-      this.employees.push({
-        id: id.value,
-        name: name.value,
-        technology: technology.value
-      });
-      this.id.nativeElement.value = '';
-      this.name.nativeElement.value = '';
-      this.technology.nativeElement.value = '';
-    }
-
-  }
-  onSaveEmp() {
-    this.employeeService.saveEmployee(this.employees).subscribe(
-      (response) => console.log(response),
-      (err) => console.log(err))
   }
   onFetchEmp() {
     this.employeeService.fetchEmployee().subscribe(
       (response) => {
-        const data = JSON.stringify(response);
-        console.log(data)
-        this.employees = JSON.parse(data);
-      },
-      (err) => console.log(err)
-    )
+        this.allEmp = response;
+        console.log(this.allEmp);
+      });
+      }
+
+  onDeleteEmp(user) {
+   this.employeeService.deleteEmployee(user).
+        subscribe(() => { this.onFetchEmp();
+        });
+
   }
-  onDeleteEmp(id) {
-    if (confirm('Do you want to delete ?')) {
-      this.employees.splice(id, 1);
-      this.onSaveEmp();
-      // console.log(id);
-      // this.employeeService.deleteEmployee(id).
-      //   subscribe(() => { })
-    }
-  }
-  onEditEmp(index: number) {
+onEditEmp(user) {
     this.editMode = true;
-    this.editIndex = index;
-    console.log(this.employees[index].id);
-    this.id.nativeElement.value = this.employees[index].id;
-    this.name.nativeElement.value = this.employees[index].name;
-    this.technology.nativeElement.value = this.employees[index].technology;
+    this.empObj = user;
+
+ }
+
+ onUpdateEmp(){
+   this.editMode = !this.editMode;
+   this.employeeService.updateEmployee(this.empObj).subscribe(() => {
+    this.onFetchEmp();
+   });
   }
+
+ onViewDetailEmp(user) {
+   this.detail = true;
+   this.employeeService.getById(user).
+   subscribe((response) => {
+     this.data = response;
+     console.log(this.data);
+ });
+
+ }
 }
 

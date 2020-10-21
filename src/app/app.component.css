@@ -4,7 +4,8 @@ h2{
    
 }
 header{
-    padding-bottom: 40px;
-    padding-top: 20px;
+    width: 100%;
+    padding-bottom: 15px;
+    padding-top: 15px;
     background-color: cadetblue;
 }

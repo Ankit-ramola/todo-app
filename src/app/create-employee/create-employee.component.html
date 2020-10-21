@@ -1,53 +1,80 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
-      <form>
+    <div class="col-sm-6">
+      <form #myForm="ngForm">
         <div class="form-group col-md-10">
           <label for="id">Emp id</label>
-          <input type="text" class="form-control" id="id" #id >
+          <input type="text" class="form-control" name="id" [(ngModel)] = "empObj.id">
         </div>
         <div class="form-group col-md-10">
           <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" #name>
+          <input type="text" class="form-control" name="name" [(ngModel)] = "empObj.name">
         </div>
 
         <div class="form-group col-md-10">
           <label for="technology">Technology</label>
-          <input type="text" class="form-control" id="Technology" #technology>
+          <input type="text" class="form-control" name="technology" [(ngModel)] = "empObj.technology">
+        </div>
+        <div class="form-group col-md-10">
+          <label for="technology">Allocated</label>
+          <input type="text" class="form-control" name="allocated" [(ngModel)] = "empObj.allocated">
         </div>
 
-        <button type="button" class="btn btn-primary" (click)="onCreateEmp(id, name, technology)">{{editMode? 'Update':'Add'}}</button>
-        <button type="button" class="btn btn-success mx-2" (click)="onSaveEmp()">Save</button>
-        <button type="button" class="btn btn-success" (click)="onFetchEmp()">Fetch</button>
+        <button type="button" class="btn btn-primary" (click)="onCreateEmp(myForm.value)" *ngIf="!this.editMode">Add</button>
+        <button type="button" class="btn btn-success" (click)="onUpdateEmp()" *ngIf="this.editMode">Update</button>
+      
       </form>
-
+      <div>
+      
+      </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <h2 class="text-center">Employee List</h2><br>
-      <table class="table">
+      <table class="table table-md">
         <thead class="thead-dark">
           <tr>
             <th scope="col">S.NO</th>
             <th scope="col">Id</th>
             <th scope="col">Name</th>
-            <th scope="col">Technology</th>
             <th scope="col" >Edit</th>
             <th scope="col">Delete</th>
+            <th scope="col">View Details</th>
           </tr>
 
         </thead>
         <tbody>
-          <tr *ngFor="let employee of employees, index as i">
+          <tr *ngFor="let employee of allEmp, index as i">
             <th scope="row">{{i+1}}</th>
             <td>{{employee.id}}</td>
             <td>{{employee.name}}</td>
-            <td>{{employee.technology}}</td>
-            <td class="text-center" (click)="onEditEmp(i)"><a class="text-primary"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
-            <td class="text-center" (click)="onDeleteEmp(i)"><a class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+             <td class="text-center" (click)="onEditEmp(employee)"><a class="text-primary"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+            <td class="text-center" (click)="onDeleteEmp(employee)"><a class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+            <td class="text-center" (click)="onViewDetailEmp(employee)"><a class="text-primary"><i class="fa fa-save" aria-hidden="true"></i></a></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
+  <div class="col-xs-12" *ngIf="this.detail"><hr>
+      <h2 class="text-center">Employee Details</h2><br>
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+           <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Technology</th>
+            <th scope="col">Allocated</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{data.id}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.technology}}</td>
+            <td>{{data.allocated}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 </div>

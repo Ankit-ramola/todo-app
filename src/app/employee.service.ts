@@ -12,16 +12,20 @@ export class EmployeeService {
     const employeeUrl = 'http://localhost:3000/employees';
     return this.httpClient.post(employeeUrl, employees);
   }
- fetchEmployee(){
+ fetchEmployee() {
     const employeeUrl = 'http://localhost:3000/employees';
     return this.httpClient.get(employeeUrl);
+   }
+   updateEmployee(user) {
+    const employeeUrl = 'http://localhost:3000/employees/';
+    return this.httpClient.put(employeeUrl + user.id, user);
   }
-  /* updateEmployee(employeeBody: any[]){
-    const employeeUrl = 'http://localhost:3000/Employee';
-    return this.httpClient.put(employeeUrl, employees);
-  }*/
-  deleteEmployee(id) {
-    const employeeUrl = 'http://localhost:3000/employees';
-    return this.httpClient.delete(employeeUrl, id);
+  deleteEmployee(user) {
+    const employeeUrl = 'http://localhost:3000/employees/';
+    return this.httpClient.delete(employeeUrl + user.id);
+  }
+  getById(user) {
+    const employeeUrl = 'http://localhost:3000/employees/';
+    return this.httpClient.get(employeeUrl + user.id);
   }
 }
