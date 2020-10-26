@@ -8,7 +8,7 @@
             [ngClass]="{'red-border-class': id.errors}" [(ngModel)]="empObj.id" required #id=ngModel
             pattern="[0-9]{1,9}">
           <div class="alert-error">
-            <span *ngIf="myForm.submitted && id.errors?.required">Please enter id</span>
+            <span *ngIf="myForm.submitted && id.errors?.required">Please enter Id</span>
             <span *ngIf="id.errors?.pattern">Invalid id</span>
           </div>
 
