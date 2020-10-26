@@ -5,8 +5,20 @@
     background-color: thistle;
 }
 .row{
-    padding-bottom: 20px;
+    padding-bottom: 15px;
 }
 button{
-    margin-left: 50px;
+    margin-left: 40px;
+}
+.alert-error{
+    color: red;
+ }
+ input.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+.form-control{
+    box-shadow: none;
+}
+a{
+    cursor: pointer;
 }

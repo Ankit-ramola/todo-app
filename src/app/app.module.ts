@@ -5,17 +5,25 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import { EmployeeService } from './employee.service';
 import { CreateEmployeeComponent } from './create-employee/create-employee.component';
+import { CustomDirective } from './custom.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateEmployeeComponent
+    CreateEmployeeComponent,
+    CustomDirective
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MaterialModule
+
   ],
   providers: [EmployeeService],
   bootstrap: [AppComponent]

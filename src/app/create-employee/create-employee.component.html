@@ -1,31 +1,57 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <form #myForm="ngForm">
+      <form #myForm="ngForm" (ngSubmit)="myForm.form.valid && onCreateEmp(myForm.value)">
         <div class="form-group col-md-10">
           <label for="id">Emp id</label>
-          <input type="text" class="form-control" name="id" [(ngModel)] = "empObj.id">
+          <input type="text" class="form-control" autocomplete="off" name="id"
+            [ngClass]="{'red-border-class': id.errors}" [(ngModel)]="empObj.id" required #id=ngModel
+            pattern="[0-9]{1,9}">
+          <div class="alert-error">
+            <span *ngIf="myForm.submitted && id.errors?.required">Please enter id</span>
+            <span *ngIf="id.errors?.pattern">Invalid id</span>
+          </div>
+
         </div>
         <div class="form-group col-md-10">
           <label for="name">Name</label>
-          <input type="text" class="form-control" name="name" [(ngModel)] = "empObj.name">
+          <input type="text" class="form-control" autocomplete="off" name="name" [(ngModel)]="empObj.name" required
+            #name=ngModel pattern="[a-z,A-Z]{1,9}">
+          <div class="alert-error">
+            <span *ngIf="myForm.submitted && name.errors?.required">Please enter Name</span>
+            <span *ngIf="name.errors?.pattern">Invalid Name</span>
+          </div>
+
         </div>
 
         <div class="form-group col-md-10">
           <label for="technology">Technology</label>
-          <input type="text" class="form-control" name="technology" [(ngModel)] = "empObj.technology">
+          <input type="text" class="form-control" autocomplete="off" name="technology" [(ngModel)]="empObj.technology"
+            required #technology=ngModel pattern="[a-z,A-Z]{1,9}">
+          <div class="alert-error">
+            <span *ngIf=" myForm.submitted && technology.errors?.required">Please enter Technology</span>
+            <span *ngIf="technology.errors?.pattern">Invalid Technology</span>
+          </div>
+
         </div>
         <div class="form-group col-md-10">
-          <label for="technology">Allocated</label>
-          <input type="text" class="form-control" name="allocated" [(ngModel)] = "empObj.allocated">
+          <label for="contact">Contact No.</label>
+          <input type="text" class="form-control" autocomplete="off" name="contact" [(ngModel)]="empObj.contact"
+            required #contact=ngModel pattern="[0-9]{5,10}">
+          <div class="alert-error">
+            <span *ngIf="myForm.submitted && contact.errors?.required">Please enter Contact No.</span>
+            <span *ngIf="contact.errors?.pattern">Invalid Contact No.</span>
+          </div>
+
         </div>
 
-        <button type="button" class="btn btn-primary" (click)="onCreateEmp(myForm.value)" *ngIf="!this.editMode">Add</button>
-        <button type="button" class="btn btn-success" (click)="onUpdateEmp()" *ngIf="this.editMode">Update</button>
-      
+        <button type="submit" mat-raised-button color="primary" *ngIf="!this.editMode">Add</button>
+        <button type="button" mat-raised-button color="primary" (click)="onUpdateEmp()"
+          *ngIf="this.editMode">Update</button>
+
       </form>
       <div>
-      
+
       </div>
     </div>
 
@@ -37,7 +63,7 @@
             <th scope="col">S.NO</th>
             <th scope="col">Id</th>
             <th scope="col">Name</th>
-            <th scope="col" >Edit</th>
+            <th scope="col">Edit</th>
             <th scope="col">Delete</th>
             <th scope="col">View Details</th>
           </tr>
@@ -48,33 +74,37 @@
             <th scope="row">{{i+1}}</th>
             <td>{{employee.id}}</td>
             <td>{{employee.name}}</td>
-             <td class="text-center" (click)="onEditEmp(employee)"><a class="text-primary"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
-            <td class="text-center" (click)="onDeleteEmp(employee)"><a class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-            <td class="text-center" (click)="onViewDetailEmp(employee)"><a class="text-primary"><i class="fa fa-save" aria-hidden="true"></i></a></td>
+            <td class="text-center" (click)="onEditEmp(employee)"><a class="text-primary"><i class="fa fa-edit"
+                  aria-hidden="true"></i></a></td>
+            <td class="text-center" (click)="onDeleteEmp(employee)"><a class="text-danger"><i class="fa fa-trash"
+                  aria-hidden="true"></i></a></td>
+            <td class="text-center" (click)="onViewDetailEmp(employee)"><a class="text-primary"><i
+                  class="fa fa-user-circle-o" aria-hidden="true"></i></a></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <div class="col-xs-12" *ngIf="this.detail"><hr>
-      <h2 class="text-center">Employee Details</h2><br>
-      <table class="table table-bordered table-sm">
-        <thead>
-          <tr>
-           <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Technology</th>
-            <th scope="col">Allocated</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{data.id}}</td>
-            <td>{{data.name}}</td>
-            <td>{{data.technology}}</td>
-            <td>{{data.allocated}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="col-xs-12" *ngIf="this.detail">
+    <hr>
+    <h2 class="text-center">Employee Details</h2><br>
+    <table class="table table-bordered table-sm">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Technology</th>
+          <th scope="col">Contact NO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{data.id}}</td>
+          <td>{{data.name}}</td>
+          <td>{{data.technology}}</td>
+          <td>{{data.contact}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -8,9 +8,9 @@ export class EmployeeService {
 
   constructor(private httpClient: HttpClient) { }
 
-  saveEmployee(employees) {
+  saveEmployee(user) {
     const employeeUrl = 'http://localhost:3000/employees';
-    return this.httpClient.post(employeeUrl, employees);
+    return this.httpClient.post(employeeUrl, user);
   }
  fetchEmployee() {
     const employeeUrl = 'http://localhost:3000/employees';

@@ -21,4 +21,5 @@ import { CreateEmployeeComponent } from './create-employee/create-employee.compo
 // })
 // export class AppRoutingModule { }
 // // tslint:disable-next-line: max-line-length
-// export const routingcomponents = [HomeComponent, CreateEmployeeComponent, ReadEmployeeComponent, UpdateEmployeeComponent, DeleteEmployeeComponent];
+// export const routingcomponents = [HomeComponent, CreateEmployeeComponent,
+// ReadEmployeeComponent, UpdateEmployeeComponent, DeleteEmployeeComponent];

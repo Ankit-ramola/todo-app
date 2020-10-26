@@ -14,7 +14,7 @@ export class CreateEmployeeComponent implements OnInit {
     id : '',
     name : '',
     technology : '',
-    allocated : ''
+    contact : ''
    };
 
   data: any;
@@ -24,7 +24,7 @@ export class CreateEmployeeComponent implements OnInit {
   editMode = false;
   detail = false;
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.onFetchEmp();
    }
    onCreateEmp(formObj) {
@@ -50,12 +50,17 @@ export class CreateEmployeeComponent implements OnInit {
 
   }
 onEditEmp(user) {
-    this.editMode = true;
-    this.empObj = user;
+    this.editMode = !this.editMode;
+    this.editMode === true ?  this.empObj = user : this.empObj = {
+      id : '',
+      name : '',
+      technology : '',
+      contact : ''
+     };
 
  }
 
- onUpdateEmp(){
+ onUpdateEmp() {
    this.editMode = !this.editMode;
    this.employeeService.updateEmployee(this.empObj).subscribe(() => {
     this.onFetchEmp();
@@ -63,7 +68,7 @@ onEditEmp(user) {
   }
 
  onViewDetailEmp(user) {
-   this.detail = true;
+   this.detail = !this.detail;
    this.employeeService.getById(user).
    subscribe((response) => {
      this.data = response;

@@ -1,28 +1,22 @@
 {
   "employees": [
     {
-      "id": "1",
-      "name": "Amit",
-      "technology": "HTML",
-      "allocated": "yes"
-    },
-    {
-      "id": "2",
-      "name": "Atul",
-      "technology": "CSS",
-      "allocated": "No"
-    },
-    {
-      "id": "3",
-      "name": "Teena",
+      "id": "6",
+      "name": "Ravi",
       "technology": "Java",
-      "allocated": "yes"
+      "contact": "4315142"
     },
     {
-      "id": "4",
-      "name": "admin",
-      "technology": "react",
-      "allocated": "No"
+      "id": "35",
+      "name": "naveen",
+      "technology": "Angular",
+      "contact": "1234123"
+    },
+    {
+      "id": "36",
+      "name": "sahil",
+      "technology": "C",
+      "contact": "32747"
     }
   ]
 }
